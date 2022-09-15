@@ -84,3 +84,7 @@ production:
   database: monte_cinema_production
   username: monte_cinema
   password: <%= ENV["MONTE_CINEMA_DATABASE_PASSWORD"] %>
+  connect_timeout: 5
+  variables:
+    statement_timeout: 15s
+    lock_timeout: 10s
