@@ -75,9 +75,9 @@ group :test do
   gem 'capybara'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
-  gem 'webdrivers'
   gem 'shoulda-matchers', '~> 5.0'
+  gem 'webdrivers'
 end
 
-gem "faker", "~> 2.23"
-gem "strong_migrations"
+gem 'faker', '~> 2.23'
+gem 'strong_migrations'
