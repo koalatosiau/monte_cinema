@@ -1,0 +1,10 @@
+<%= form_with model: @movie do |form| %>
+  <% @movie.errors.each do |error| %>
+    <p><%= error.full_message %></p>
+  <% end %>
+  <p><%= form.text_field :title, placeholder: 'title' %>
+  <%= form.text_field :description, placeholder: 'description' %>
+  <%= form.text_field :runtime, placeholder: 'runtime' %>
+  <%= form.submit %>
+  <%= link_to "Cancel", cancel_path %></p>
+<% end %>
