@@ -1,5 +1,5 @@
 class HallsController < ApplicationController
-before_action :set_hall, only: %i[ show edit update ]
+before_action :set_hall, only: %i[ show edit update destroy ]
 
   def index
     @halls = Hall.all
@@ -30,6 +30,13 @@ before_action :set_hall, only: %i[ show edit update ]
       render :edit, status: :unprocessable_entity
     end
   end
+
+  def destroy
+    @hall.destroy
+
+    redirect_to halls_path, status: :see_other
+  end
+
   private
   def set_hall
     @hall = Hall.find(params[:id])
