@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: %i[show]
+  before_action :set_movie, only: %i[show edit update]
 
   def index
     @movies = Movie.all
@@ -20,6 +20,16 @@ class MoviesController < ApplicationController
   end
 
   def show; end
+
+  def edit; end
+
+  def update
+    if @movie.update(movie_params)
+      redirect_to @movie
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   private
 
