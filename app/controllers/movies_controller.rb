@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: %i[show edit update]
+  before_action :set_movie, only: %i[show edit update destroy]
 
   def index
     @movies = Movie.all
@@ -29,6 +29,12 @@ class MoviesController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @movie.destroy
+
+    redirect_to movies_path, status: :see_other
   end
 
   private
