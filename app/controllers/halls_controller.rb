@@ -1,5 +1,5 @@
 class HallsController < ApplicationController
-before_action :set_hall, only: %i[ show edit update destroy ]
+  before_action :set_hall, only: %i[show edit update destroy]
 
   def index
     @halls = Hall.all
@@ -19,9 +19,9 @@ before_action :set_hall, only: %i[ show edit update destroy ]
     end
   end
 
-  def show;  end
+  def show; end
 
-  def edit;  end
+  def edit; end
 
   def update
     if @hall.update(hall_params)
@@ -38,6 +38,7 @@ before_action :set_hall, only: %i[ show edit update destroy ]
   end
 
   private
+
   def set_hall
     @hall = Hall.find(params[:id])
   end

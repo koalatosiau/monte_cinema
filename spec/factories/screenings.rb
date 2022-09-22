@@ -5,4 +5,3 @@ FactoryBot.define do
     start { Faker::Time.forward(days: 3, period: :evening) }
   end
 end
-
