@@ -1,0 +1,9 @@
+<h1><%= @movie.title %></h1>
+<p><%= @movie.description %></p>
+<p>Runtime: <%= @movie.runtime %></p>
+<%= link_to 'Edit', edit_movie_path(@movie) %>
+<%= link_to 'Delete', movie_path(@movie), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %>
+<%= link_to 'Back', movies_path %>
