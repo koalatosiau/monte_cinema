@@ -1,5 +1,5 @@
 class HallsController < ApplicationController
-before_action :set_hall, only: %i[show]
+before_action :set_hall, only: %i[ show edit update ]
 
   def index
     @halls = Hall.all
@@ -21,6 +21,15 @@ before_action :set_hall, only: %i[show]
 
   def show;  end
 
+  def edit;  end
+
+  def update
+    if @hall.update(hall_params)
+      redirect_to @hall
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
   private
   def set_hall
     @hall = Hall.find(params[:id])
