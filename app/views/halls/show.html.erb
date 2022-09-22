@@ -1,0 +1,8 @@
+<h1><%= @hall.name %> Hall</h1>
+<p>Capacity: <%= @hall.capacity %></p>
+<%= link_to 'Edit', edit_hall_path(@hall) %>
+<%= link_to 'Delete', hall_path(@hall), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %>
+<%= link_to 'Back', halls_path %>

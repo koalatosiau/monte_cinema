@@ -1,4 +1,6 @@
 class HallsController < ApplicationController
+before_action :set_hall, only: %i[show]
+
   def index
     @halls = Hall.all
   end
@@ -17,7 +19,13 @@ class HallsController < ApplicationController
     end
   end
 
+  def show;  end
+
   private
+  def set_hall
+    @hall = Hall.find(params[:id])
+  end
+
   def hall_params
     params.require(:hall).permit(:name, :capacity)
   end
