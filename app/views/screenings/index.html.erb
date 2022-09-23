@@ -1,0 +1,7 @@
+<h1>Screenings</h1>
+
+<% @screenings.each do |screening| %>
+  <p><%= screening.start %>
+  <%= link_to 'Show', screening %>
+<% end %>
+<p><%= link_to 'New', new_screening_path %></p>
