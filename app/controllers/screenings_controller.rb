@@ -1,5 +1,5 @@
 class ScreeningsController < ApplicationController
-  before_action :set_screening, only: %i[show edit update]
+  before_action :set_screening, only: %i[show edit update destroy]
   before_action :set_hall, :set_movie, only: %i[new create edit update]
 
   def index
@@ -30,6 +30,12 @@ class ScreeningsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @screening.destroy
+
+    redirect_to screenings_path, status: :see_other
   end
 
   private
