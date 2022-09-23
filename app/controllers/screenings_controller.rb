@@ -1,6 +1,6 @@
 class ScreeningsController < ApplicationController
   before_action :set_screening, only: %i[show edit update destroy]
-  before_action :set_hall, :set_movie, only: %i[new create edit update]
+  before_action :set_halls, :set_movies, only: %i[new edit]
 
   def index
     @screenings = Screening.all
@@ -41,14 +41,14 @@ class ScreeningsController < ApplicationController
   private
 
   def set_screening
-    @screening = Screening.find(params[:id])
+    @screening = Screening.includes(:movie, :hall).find(params[:id])
   end
 
-  def set_hall
+  def set_halls
     @halls = Hall.all.order(:name)
   end
 
-  def set_movie
+  def set_movies
     @movies = Movie.all.order(:title)
   end
 
