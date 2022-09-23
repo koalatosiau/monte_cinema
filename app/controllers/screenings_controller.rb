@@ -1,6 +1,6 @@
 class ScreeningsController < ApplicationController
-  before_action :set_screening, only: %i[show]
-  before_action :set_hall, :set_movie, only: %i[new create]
+  before_action :set_screening, only: %i[show edit update]
+  before_action :set_hall, :set_movie, only: %i[new create edit update]
 
   def index
     @screenings = Screening.all
@@ -21,6 +21,16 @@ class ScreeningsController < ApplicationController
   end
 
   def show; end
+
+  def edit; end
+
+  def update
+    if @screening.update(screening_params)
+      redirect_to @screening
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   private
 
