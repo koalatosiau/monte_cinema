@@ -1,0 +1,9 @@
+<p>Movie: <%= @screening.movie.title %></p>
+<p>Start: <%= @screening.start %></p>
+<p>Hall: <%= @screening.hall.name %></p>
+<%= link_to 'Edit', edit_screening_path(@screening) %>
+<%= link_to 'Delete', screening_path(@screening), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %>
+<%= link_to 'Back', screenings_path %>

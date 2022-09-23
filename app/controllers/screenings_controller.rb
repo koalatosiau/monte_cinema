@@ -1,4 +1,5 @@
 class ScreeningsController < ApplicationController
+  before_action :set_screening, only: %i[show]
   before_action :set_hall, :set_movie, only: %i[new create]
 
   def index
@@ -19,7 +20,13 @@ class ScreeningsController < ApplicationController
     end
   end
 
+  def show; end
+
   private
+
+  def set_screening
+    @screening = Screening.find(params[:id])
+  end
 
   def set_hall
     @halls = Hall.all.order(:name)
