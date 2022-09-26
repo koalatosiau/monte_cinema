@@ -1,0 +1,10 @@
+<%= form_with model: @screening do |form| %>
+  <% @screening.errors.each do |error| %>
+    <p><%= error.full_message %></p>
+  <% end %>
+  <p><%= form.datetime_field :start %>
+    <%= form.collection_select :hall_id, @halls, :id, :name, prompt: true %>
+    <%= form.collection_select :movie_id, @movies, :id, :title, prompt: true %>
+  <%= form.submit %>
+  <%= link_to "Cancel", cancel_path %></p>
+<% end %>
