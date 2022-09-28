@@ -7,7 +7,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 hall_capacities = [10, 15, 20, 30, 35, 50, 100, 150]
-hall_capacities.each_with_index do |capacity, index|
+hall_capacities.each do |capacity|
     Hall.find_or_create_by(name: Faker::Color.color_name.capitalize, capacity: capacity)
 end
 
