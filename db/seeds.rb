@@ -12,6 +12,6 @@ hall_capacities.each do |capacity|
 end
 
 movie_runtimes = [72, 90, 99, 100, 120, 140, 175]
-movie_runtimes.each do |runtime, index|
+movie_runtimes.each do |runtime|
   Movie.find_or_create_by(title: Faker::Movie.title, description: Faker::Lorem.paragraph, runtime: runtime)
 end
