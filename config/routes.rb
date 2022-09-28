@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :halls
   resources :movies
   resources :screenings
+  resources :reservations
 end

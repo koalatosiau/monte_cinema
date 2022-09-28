@@ -1,0 +1,9 @@
+<%= form_with model: @reservation do |form| %>
+  <% @reservation.errors.each do |error| %>
+    <p><%= error.full_message %></p>
+  <% end %>
+  <p><%= form.number_field :quantity, in: 1..10 %>
+    <%= form.collection_select :screening_id, @screenings, :id, :start, prompt: true %>
+  <%= form.submit %>
+  <%= link_to "Cancel", cancel_path %></p>
+<% end %>

@@ -1,0 +1,8 @@
+<h1>Reservations</h1>
+
+<% @reservations.order("created_at desc").each do |reservation| %>
+  <p><%= reservation.created_at %>
+  <%= reservation.quantity %>
+  <%= link_to 'Show', reservation %>
+<% end %>
+<p><%= link_to 'New', new_reservation_path %></p>
