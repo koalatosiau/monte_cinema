@@ -30,12 +30,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_095635) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.integer "quantity"
-    t.string "status"
+    t.integer "quantity", null: false
+    t.integer "status", default: 0, null: false
     t.bigint "screening_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["screening_id"], name: "index_reservations_on_screening_id"
+    t.check_constraint "quantity >= 1", name: "quantity_check"
   end
 
   create_table "screenings", force: :cascade do |t|

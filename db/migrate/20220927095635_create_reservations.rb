@@ -3,7 +3,7 @@ class CreateReservations < ActiveRecord::Migration[7.0]
     create_table :reservations do |t|
       t.integer :quantity, null: false
       t.check_constraint("quantity >= 1", name: "quantity_check")
-      t.string :status, null: false
+      t.integer :status, null: false, default: 0
       t.references :screening, index: true
 
       t.timestamps
