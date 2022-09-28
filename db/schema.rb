@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_16_103420) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_27_095635) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +27,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_16_103420) do
     t.integer "runtime", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.integer "quantity", null: false
+    t.integer "status", default: 0, null: false
+    t.bigint "screening_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["screening_id"], name: "index_reservations_on_screening_id"
+    t.check_constraint "quantity >= 1", name: "quantity_check"
   end
 
   create_table "screenings", force: :cascade do |t|
