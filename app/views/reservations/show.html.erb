@@ -1,0 +1,6 @@
+<p>Movie: <%= @screening.movie.title %></p>
+<p>Start: <%= @screening.start %></p>
+<p>Hall: <%= @screening.hall.name %></p>
+<p>Number of tickets: <%= @reservation.quantity %></p>
+<%= link_to 'Edit', edit_reservation_path(@reservation) %>
+<%= link_to 'Back', reservations_path %>
