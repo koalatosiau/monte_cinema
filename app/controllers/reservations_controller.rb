@@ -3,7 +3,7 @@ class ReservationsController < ApplicationController
   before_action :set_screenings, only: %i[new edit]
 
   def index
-    @reservations = Reservation.all.includes(screening: :movie)
+    @reservations = Reservation.includes(screening: :movie)
   end
 
   def new
