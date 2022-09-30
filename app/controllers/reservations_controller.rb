@@ -41,7 +41,7 @@ class ReservationsController < ApplicationController
   end
 
   def set_screenings
-    @screenings = Screening.all.includes(:movie).order(:start)
+    @screenings = Screening.includes(:movie).order(:start)
   end
 
   def reservation_params
