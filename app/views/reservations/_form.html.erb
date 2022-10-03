@@ -3,7 +3,7 @@
     <p><%= error.full_message %></p>
   <% end %>
   <p><%= form.number_field :quantity, in: 1..10 %>
-  <%= form.collection_select :screening_id, @screenings, :id, :movie_tite_with_start %>
+  <%= form.collection_select :screening_id, @screenings, :id, :movie_title_with_start %>
   <%= form.submit %>
   <%= link_to "Cancel", cancel_path %></p>
 <% end %>

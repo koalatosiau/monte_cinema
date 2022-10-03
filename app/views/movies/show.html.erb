@@ -1,9 +1,17 @@
-<h1><%= @movie.title %></h1>
-<p><%= @movie.description %></p>
-<p>Runtime: <%= @movie.runtime %></p>
-<%= link_to 'Edit', edit_movie_path(@movie) %>
-<%= link_to 'Delete', movie_path(@movie), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %>
-<%= link_to 'Back', movies_path %>
+<div class="w-75 d-flex flex-wrap my-5 m-auto">
+  <div class="w-100 card m-2 text-bg-dark">
+    <div class="card-header">
+      <%= @movie.title %>
+    </div>
+    <div class="card-body">
+      <p class="card-text">Runtime: <%= @movie.runtime %></p>
+      <p class="card-text">Summary: <%= @movie.description %></p>
+      <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-outline-warning btn-sm'%>
+      <%= link_to 'Delete', movie_path(@movie), data: {
+                          turbo_method: :delete,
+                          turbo_confirm: "Are you sure?"
+                        }, class: 'btn btn-outline-warning btn-sm'%>
+    </div>
+  </div>
+  <%= link_to 'Back', movies_path, class: 'btn btn-outline-warning m-2' %>
+</div>

@@ -1,9 +1,12 @@
-<%= form_with model: @hall do |form| %>
-  <% @hall.errors.each do |error| %>
-    <p><%= error.full_message %></p>
+<div class="card-body">
+  <p class="card-text">
+  <%= form_with model: @hall do |form| %>
+    <% @hall.errors.each do |error| %>
+      <p><%= error.full_message %></p>
+    <% end %>
+    <%= form.text_field :name, placeholder: 'name' %>
+    <%= form.text_field :capacity, placeholder: 'capacity' %>
+    <%= form.submit class: 'btn btn-sm btn-outline-warning' %>
+    <%= link_to "Cancel", :back, class: 'btn btn-sm btn-outline-warning'%>
   <% end %>
-  <p><%= form.text_field :name, placeholder: 'name' %>
-  <%= form.text_field :capacity, placeholder: 'capacity' %>
-  <%= form.submit %>
-  <%= link_to "Cancel", cancel_path %></p>
-<% end %>
+</div>

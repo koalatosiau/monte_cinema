@@ -1,7 +1,23 @@
-<h1>Movies</h1>
-
-<% @movies.each do |movie| %>
-  <p><%= movie.title %>
-  <%= link_to 'Show', movie %>
-<% end %>
-<p><%= link_to 'New', new_movie_path %></p>
+<div class="w-75 d-flex flex-wrap my-5 m-auto">
+  <% @movies.each do |movie| %>
+    <div class="w-25 card m-2 text-bg-dark">
+      <div class="card-header">
+        <%= movie.title %>
+      </div>
+      <div class="card-body">
+        <p class="card-text text-truncate"><%= movie.description %></p>
+        <%= link_to 'Show', movie, class: 'btn btn-outline-warning btn-sm'%>
+        <%= link_to 'Edit', edit_movie_path(movie), class: 'btn btn-outline-warning btn-sm'%>
+        <%= link_to 'Delete', movie_path(movie), data: {
+                            turbo_method: :delete,
+                            turbo_confirm: "Are you sure?"
+                          }, class: 'btn btn-outline-warning btn-sm'%>
+      </div>
+    </div>
+  <% end %>
+  <%= link_to new_movie_path, class: 'card w-25 text-bg-dark m-2 text-decoration-none' do %>
+    <div class="btn btn-outline-warning btn-lg m-2 m-auto">
+      New movie
+    </div>
+  <% end %>
+</div>
