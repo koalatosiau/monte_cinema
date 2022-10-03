@@ -6,6 +6,7 @@
     <% end %>
     <%= form.number_field :quantity, in: 1..10 %>
     <%= form.collection_select :screening_id, @screenings, :id, :movie_title_with_start %>
+    <%= form.text_field :email, placeholder: 'email' %>
     <%= form.submit class: 'btn btn-sm btn-outline-warning' %>
     <%= link_to "Cancel", :back, class: 'btn btn-sm btn-outline-warning'%>
   <% end %>
