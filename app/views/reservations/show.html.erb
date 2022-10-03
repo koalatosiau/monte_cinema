@@ -4,6 +4,7 @@
       <%= @screening.movie.title %>
     </div>
     <div class="card-body">
+      <p class="card-text">Email: <%= @reservation.email %></p>
       <p class="card-text">Movie: <%= @screening.movie.title %></p>
       <p class="card-text">Start: <%= @screening.start %></p>
       <p class="card-text">Number of tickets: <%= @reservation.quantity %></p>

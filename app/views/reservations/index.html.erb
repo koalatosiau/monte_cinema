@@ -14,7 +14,7 @@
       <tbody>
         <% @reservations.order("created_at desc").each do |reservation| %>
           <tr>
-            <th scope="row">email - tba</th>
+            <td><%= reservation.email %></td>
             <td class="text-wrap"><%= reservation.screening.movie_title_with_start %></td>
             <td class="text-wrap"><%= reservation.created_at %></td>
             <td><%= reservation.quantity %></td>
