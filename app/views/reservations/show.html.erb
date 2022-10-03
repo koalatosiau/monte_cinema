@@ -1,6 +1,14 @@
-<p>Movie: <%= @screening.movie.title %></p>
-<p>Start: <%= @screening.start %></p>
-<p>Hall: <%= @screening.hall.name %></p>
-<p>Number of tickets: <%= @reservation.quantity %></p>
-<%= link_to 'Edit', edit_reservation_path(@reservation) %>
-<%= link_to 'Back', reservations_path %>
+<div class="w-75 d-flex flex-wrap my-5 m-auto">
+  <div class="w-100 card m-2 text-bg-dark">
+    <div class="card-header">
+      <%= @screening.movie.title %>
+    </div>
+    <div class="card-body">
+      <p class="card-text">Movie: <%= @screening.movie.title %></p>
+      <p class="card-text">Start: <%= @screening.start %></p>
+      <p class="card-text">Number of tickets: <%= @reservation.quantity %></p>
+      <%= link_to 'Edit', edit_reservation_path(@reservation), class: 'btn btn-outline-warning btn-sm'%>
+    </div>
+  </div>
+  <%= link_to 'Back', reservations_path, class: 'btn btn-outline-warning m-2' %>
+</div>
