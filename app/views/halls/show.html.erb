@@ -1,8 +1,16 @@
-<h1><%= @hall.name %> Hall</h1>
-<p>Capacity: <%= @hall.capacity %></p>
-<%= link_to 'Edit', edit_hall_path(@hall) %>
-<%= link_to 'Delete', hall_path(@hall), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %>
-<%= link_to 'Back', halls_path %>
+<div class="w-75 d-flex flex-wrap my-5 m-auto">
+  <div class="w-100 card m-2 text-bg-dark">
+    <div class="card-header">
+      <%= @hall.name %> Hall
+    </div>
+    <div class="card-body">
+      <p class="card-text">Capacity: <%= @hall.capacity %></p>
+      <%= link_to 'Edit', edit_hall_path(@hall), cancel_path: hall_path(@hall), class: 'btn btn-outline-warning btn-sm'%>
+      <%= link_to 'Delete', hall_path(@hall), data: {
+                          turbo_method: :delete,
+                          turbo_confirm: "Are you sure?"
+                        }, class: 'btn btn-outline-warning btn-sm'%>
+    </div>
+  </div>
+  <%= link_to 'Back', halls_path, class: 'btn btn-outline-warning m-2' %>
+</div>

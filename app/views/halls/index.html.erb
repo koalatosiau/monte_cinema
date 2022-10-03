@@ -1,8 +1,23 @@
-<h1>Halls</h1>
-
-<% @halls.each do |hall| %>
-  <p><%= hall.name %>
-  <%= hall.capacity %>
-  <%= link_to 'Show', hall %>
-<% end %>
-<p><%= link_to 'New', new_hall_path %></p>
+<div class="w-75 d-flex flex-wrap my-5 m-auto">
+  <% @halls.each do |hall| %>
+    <div class="w-25 card m-2 text-bg-dark">
+      <div class="card-header">
+        <%= hall.name %>
+      </div>
+      <div class="card-body">
+        <p class="card-text">Capacity: <%= hall.capacity %></p>
+        <%= link_to 'Show', hall, class: 'btn btn-outline-warning btn-sm'%>
+        <%= link_to 'Edit', edit_hall_path(hall), class: 'btn btn-outline-warning btn-sm'%>
+        <%= link_to 'Delete', hall_path(hall), data: {
+                            turbo_method: :delete,
+                            turbo_confirm: "Are you sure?"
+                          }, class: 'btn btn-outline-warning btn-sm'%>
+      </div>
+    </div>
+  <% end %>
+  <%= link_to new_hall_path, class: 'card w-25 text-bg-dark m-2 text-decoration-none' do %>
+    <div class="btn btn-outline-warning btn-lg m-2 m-auto">
+      New hall
+    </div>
+  <% end %>
+</div>

@@ -1,7 +1,23 @@
-<h1>Screenings</h1>
-
-<% @screenings.each do |screening| %>
-  <p><%= screening.start %>
-  <%= link_to 'Show', screening %>
-<% end %>
-<p><%= link_to 'New', new_screening_path %></p>
+<div class="w-75 d-flex flex-wrap my-5 m-auto">
+  <% @screenings.each do |screening| %>
+    <div class="w-25 card m-2 text-bg-dark">
+      <div class="card-header">
+        <%= screening.movie.title %>
+      </div>
+      <div class="card-body">
+        <p class="card-text">Start: <%= screening.start %></p>
+        <%= link_to 'Show', screening, class: 'btn btn-outline-warning btn-sm'%>
+        <%= link_to 'Edit', edit_screening_path(screening), class: 'btn btn-outline-warning btn-sm'%>
+        <%= link_to 'Delete', screening_path(screening), data: {
+                            turbo_method: :delete,
+                            turbo_confirm: "Are you sure?"
+                          }, class: 'btn btn-outline-warning btn-sm'%>
+      </div>
+    </div>
+  <% end %>
+  <%= link_to new_screening_path, class: 'card w-25 text-bg-dark m-2 text-decoration-none' do %>
+    <div class="btn btn-outline-warning btn-lg m-2 m-auto">
+      New screening
+    </div>
+  <% end %>
+</div>
