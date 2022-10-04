@@ -35,7 +35,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_03_172937) do
     t.bigint "screening_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "email"
     t.index ["screening_id"], name: "index_reservations_on_screening_id"
     t.check_constraint "quantity >= 1", name: "quantity_check"
   end
