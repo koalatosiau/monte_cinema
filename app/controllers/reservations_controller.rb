@@ -45,6 +45,6 @@ class ReservationsController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:quantity, :status, :screening_id)
+    params.require(:reservation).permit(:quantity, :status, :screening_id, :email)
   end
 end
