@@ -6,12 +6,18 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-hall_capacities = [10, 15, 20, 30, 35, 50, 100, 150]
-hall_capacities.each do |capacity|
-    Hall.find_or_create_by(name: Faker::Color.color_name.capitalize, capacity: capacity)
+hall_capacities = [10, 30, 50, 100, 150]
+(5 - Hall.count).times do
+  Hall.find_or_create_by(name: Faker::Color.color_name.capitalize, capacity: hall_capacities.sample)
 end
 
-movie_runtimes = [72, 90, 99, 100, 120, 140, 175]
-movie_runtimes.each do |runtime|
-  Movie.find_or_create_by(title: Faker::Movie.title, description: Faker::Lorem.paragraph, runtime: runtime)
+movie_runtimes = [72, 90, 100, 120, 175]
+(5 - Movie.count).times do
+  Movie.find_or_create_by(title: Faker::Movie.title, description: Faker::Lorem.paragraph, runtime: movie_runtimes.sample)
+end
+
+# Update screening seeds to iterate over halls or days_in_advance if restricting screening to one per hall at the time.
+days_in_advance = [2, 5, 7]
+(3 - Screening.count).times do
+  Screening.find_or_create_by(hall: Hall.all.sample, movie: Movie.all.sample, start: Time.new.next_day(days_in_advance.sample))
 end
