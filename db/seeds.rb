@@ -4,8 +4,6 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
 hall_capacities = [10, 30, 50, 100, 150]
 (5 - Hall.count).times do
   Hall.find_or_create_by(name: Faker::Color.color_name.capitalize, capacity: hall_capacities.sample)
