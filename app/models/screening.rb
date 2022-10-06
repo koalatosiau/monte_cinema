@@ -5,7 +5,17 @@ class Screening < ApplicationRecord
 
   validates :start, presence: true
 
+  delegate :capacity, to: :hall
+
   def movie_title_with_start
     "#{movie.title}, #{start.strftime('%d %b %Y, %H:%M')}"
+  end
+
+  def seats_taken
+    reservations.map(&:reserved_seats_numbers).flatten
+  end
+
+  def seats_availability
+    (1..capacity).to_a  - seats_taken
   end
 end
