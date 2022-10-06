@@ -12,10 +12,7 @@ class Screening < ApplicationRecord
   end
 
   def seats_taken
-    reservations.map do |reservation|
-      reservation.seats_reserved
-    end
-    .flatten
+    reservations.map(&:reserved_seats_numbers).flatten
   end
 
   def seats_availability

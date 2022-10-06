@@ -9,7 +9,7 @@ class Reservation < ApplicationRecord
 
   delegate :movie_title_with_start, to: :screening
 
-  def seats_reserved
+  def reserved_seats_numbers
     seats.pluck(:number)
   end
 end

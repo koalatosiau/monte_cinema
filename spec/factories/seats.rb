@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :seat do
     reservation
-    number { 1 }
+    number { Faker::Number.number(digits: 1) }
   end
 end
