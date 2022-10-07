@@ -5,10 +5,13 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root to: "screenings#index"
+  root to: "movies#index"
 
   resources :halls
   resources :movies
-  resources :screenings
-  resources :reservations
+  resources :screenings do
+    resources :reservations, except: :index
+  end
+
+  resources :reservations, only: :index
 end

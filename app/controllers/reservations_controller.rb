@@ -1,19 +1,17 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: %i[show edit update]
-  before_action :set_screenings, only: %i[new edit]
+  before_action :set_screening, only: %i[new create edit]
 
   def index
     @reservations = Reservation.includes(screening: :movie)
   end
 
   def new
-    @reservation = Reservation.new
+    @reservation = @screening.reservations.build
   end
 
   def create
-    @reservation = Reservation.new(reservation_params)
-
-    if @reservation.save
+    if @screening.reservations.create!(reservation_params)
       redirect_to reservations_path
     else
       render :new, status: :unprocessable_entity
@@ -28,7 +26,7 @@ class ReservationsController < ApplicationController
 
   def update
     if @reservation.update(reservation_params)
-      redirect_to @reservation
+      redirect_to screening_reservation_path(@reservation)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,11 +38,11 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.includes(:screening).find(params[:id])
   end
 
-  def set_screenings
-    @screenings = Screening.includes(:movie).order(:start)
+  def set_screening
+    @screening = Screening.find(params[:screening_id])
   end
 
   def reservation_params
-    params.require(:reservation).permit(:quantity, :status, :screening_id, :email)
+    params.require(:reservation).permit(:quantity, :status, :email)
   end
 end

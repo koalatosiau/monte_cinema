@@ -57,6 +57,7 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'devise'
   gem "pundit", "~> 2.2"
+  gem 'pry', '~> 0.14.1'
   gem 'factory_bot_rails'
   gem 'faker', '~> 2.23'
   gem 'rubocop', '~> 1.36.0', require: false
