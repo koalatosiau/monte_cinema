@@ -20,12 +20,11 @@
             <td><%= reservation.quantity %></td>
             <td><%= reservation.status %></td>
             <td>
-              <%= link_to 'Show', reservation, class: 'btn btn-outline-warning btn-sm' %>
+              <%= link_to 'Show', screening_reservation_path(reservation.screening, reservation), class: 'btn btn-outline-warning btn-sm' %>
             </td>
           </tr>
         <% end %>
       </tbody>
     </table>
-    <%= link_to 'Add new Reservation', new_reservation_path, class: 'w-100 btn btn-warning m-2 m-auto' %>
     </div>
 </div>

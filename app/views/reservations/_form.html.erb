@@ -1,11 +1,11 @@
 <div class="card-body">
   <p class="card-text">
-  <%= form_with model: @reservation do |form| %>
-    <% @reservation.errors.each do |error| %>
+    <%= reservation.screening.movie_title_with_start %>
+  <%= form_with(model: [@screening, reservation]) do |form| %>
+    <% reservation.errors.each do |error| %>
       <p><%= error.full_message %></p>
     <% end %>
     <%= form.number_field :quantity, in: 1..10 %>
-    <%= form.collection_select :screening_id, @screenings, :id, :movie_title_with_start %>
     <%= form.text_field :email, placeholder: 'email' %>
     <%= form.submit class: 'btn btn-sm btn-outline-warning' %>
     <%= link_to "Cancel", :back, class: 'btn btn-sm btn-outline-warning'%>
