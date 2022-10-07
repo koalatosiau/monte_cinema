@@ -14,7 +14,11 @@
             <td><%= screening.movie.title %></td>
             <td class="text-wrap"><%= screening.start %></td>
             <td>
-              <%= link_to 'Show', screening, class: 'btn btn-outline-warning btn-sm' %>
+              <%= link_to 'Edit', edit_screening_path(screening), class: 'btn btn-outline-warning btn-sm'%>
+              <%= link_to 'Delete', screening_path(screening), data: {
+                                  turbo_method: :delete,
+                                  turbo_confirm: "Are you sure?"
+                                }, class: 'btn btn-outline-warning btn-sm'%>
               <%= link_to 'Add reservation', new_screening_reservation_path(screening), class: 'btn btn-outline-warning btn-sm' %>
             </td>
           </tr>

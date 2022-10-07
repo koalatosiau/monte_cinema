@@ -1,16 +1,19 @@
 class ScreeningsController < ApplicationController
-  before_action :set_screening, only: %i[show edit update destroy]
+  before_action :set_screening, only: %i[edit update destroy]
   before_action :set_halls, :set_movies, only: %i[new edit]
 
   def index
     @screenings = Screening.all
+    authorize @screenings
   end
 
   def new
+    authorize Screening
     @screening = Screening.new
   end
 
   def create
+    authorize Screening
     @screening = Screening.new(screening_params)
 
     if @screening.save
@@ -19,8 +22,6 @@ class ScreeningsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-
-  def show; end
 
   def edit; end
 
@@ -42,6 +43,7 @@ class ScreeningsController < ApplicationController
 
   def set_screening
     @screening = Screening.includes(:movie, :hall).find(params[:id])
+    authorize @screening
   end
 
   def set_halls
