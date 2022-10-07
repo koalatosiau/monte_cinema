@@ -3,13 +3,16 @@ class HallsController < ApplicationController
 
   def index
     @halls = Hall.all
+    authorize @halls
   end
 
   def new
+    authorize Hall
     @hall = Hall.new
   end
 
   def create
+    authorize Hall
     @hall = Hall.new(hall_params)
 
     if @hall.save
@@ -41,6 +44,7 @@ class HallsController < ApplicationController
 
   def set_hall
     @hall = Hall.find(params[:id])
+    authorize @hall
   end
 
   def hall_params
