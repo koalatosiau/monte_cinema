@@ -6,11 +6,9 @@
     <div class="card-body">
       <p class="card-text">Runtime: <%= @movie.runtime %></p>
       <p class="card-text">Summary: <%= @movie.description %></p>
-      <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-outline-warning btn-sm'%>
-      <%= link_to 'Delete', movie_path(@movie), data: {
-                          turbo_method: :delete,
-                          turbo_confirm: "Are you sure?"
-                        }, class: 'btn btn-outline-warning btn-sm'%>
+      <p class="card-text">
+        <%= render 'links', movie: @movie %>
+      </p>
       <p class="card-text">
         <% @movie.screenings.each do |screening| %>
           <%= link_to "#{screening.start.strftime('%d %b, %H:%M')}", new_screening_reservation_path(screening), class: 'btn btn-warning btn-sm' %>

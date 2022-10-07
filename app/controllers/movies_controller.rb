@@ -3,13 +3,16 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+    authorize @movies
   end
 
   def new
+    authorize Movie
     @movie = Movie.new
   end
 
   def create
+    authorize Movie
     @movie = Movie.new(movie_params)
 
     if @movie.save
@@ -41,6 +44,7 @@ class MoviesController < ApplicationController
 
   def set_movie
     @movie = Movie.find(params[:id])
+    authorize @movie
   end
 
   def movie_params
