@@ -8,12 +8,11 @@ class ReservationsController < ApplicationController
   end
 
   def new
-    authorize Reservation
     @reservation = @screening.reservations.build
   end
 
   def create
-    authorize Reservation
+    redirect_existing_user and return if User.pluck(:email).include?(reservation_params[:email])
     new_reservation_params = reservation_params.merge(email: current_user&.email) if current_user&.user?
     if @screening.reservations.create!(new_reservation_params || reservation_params)
       redirect_to after_create_reservation_path
@@ -45,6 +44,11 @@ class ReservationsController < ApplicationController
   end
 
   private
+
+  def redirect_existing_user
+    flash[:alert] = "Sign in before reservation"
+    redirect_to new_user_session_path, status: :see_other
+  end
 
   def after_create_reservation_path
     user_signed_in? ? reservations_path : root_path

@@ -13,14 +13,6 @@ class  ReservationPolicy < ApplicationPolicy
     user
   end
 
-  def new?
-    true
-  end
-
-  def create?
-    new?
-  end
-
   def show?
     user&.admin?
   end
