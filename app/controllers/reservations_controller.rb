@@ -1,9 +1,10 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: %i[show edit update]
-  before_action :set_screening, only: %i[new create edit]
+  before_action :set_screening, only: %i[new create show edit]
 
   def index
-    @reservations = Reservation.includes(screening: :movie)
+    authorize Reservation
+    @reservations = policy_scope(Reservation).includes(screening: :movie)
   end
 
   def new
@@ -11,16 +12,15 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    if @screening.reservations.create!(reservation_params)
-      redirect_to reservations_path
+    new_reservation_params = reservation_params.merge(email: current_user&.email) if current_user&.user?
+    if @screening.reservations.create!(new_reservation_params || reservation_params)
+      redirect_to after_create_reservation_path
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  def show
-    @screening = @reservation.screening
-  end
+  def show; end
 
   def edit; end
 
@@ -34,8 +34,12 @@ class ReservationsController < ApplicationController
 
   private
 
+  def after_create_reservation_path
+    user_signed_in? ? reservations_path : root_path
+  end
+
   def set_reservation
-    @reservation = Reservation.includes(:screening).find(params[:id])
+    @reservation = Reservation.find(params[:id])
   end
 
   def set_screening

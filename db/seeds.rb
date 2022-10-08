@@ -19,3 +19,9 @@ days_in_advance = [2, 5, 7]
 (3 - Screening.count).times do
   Screening.find_or_create_by(hall: Hall.all.sample, movie: Movie.all.sample, start: Time.new.next_day(days_in_advance.sample))
 end
+
+user = User.find_by(email: 'user@example.com')
+User.create(email: 'user@example.com', password: '123456', password_confirmation: '123456') unless user
+
+admin = User.find_by(email: 'admin@example.com')
+User.create(email: 'admin@example.com', password: '123456', password_confirmation: '123456', role: :admin) unless admin

@@ -20,7 +20,11 @@
             <td><%= reservation.quantity %></td>
             <td><%= reservation.status %></td>
             <td>
-              <%= link_to 'Show', screening_reservation_path(reservation.screening, reservation), class: 'btn btn-outline-warning btn-sm' %>
+              <% if policy(reservation).show? %>
+                <%= link_to 'Show', screening_reservation_path(reservation.screening, reservation), class: 'btn btn-outline-warning btn-sm' %>
+              <% else %>
+                <%= link_to 'Edit', edit_screening_reservation_path(reservation.screening, reservation), class: 'btn btn-outline-warning btn-sm' %>
+              <% end %>
             </td>
           </tr>
         <% end %>
