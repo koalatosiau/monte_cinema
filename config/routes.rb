@@ -10,7 +10,12 @@ Rails.application.routes.draw do
   resources :halls
   resources :movies
   resources :screenings do
-    resources :reservations, except: :index
+    resources :reservations, except: :index do
+      member do
+        patch :confirm
+        patch :cancel
+      end
+    end
   end
 
   resources :reservations, only: :index

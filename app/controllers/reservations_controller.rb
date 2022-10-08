@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
-  before_action :set_reservation, only: %i[show edit update]
-  before_action :set_screening, only: %i[new create show edit]
+  before_action :set_reservation, only: %i[show edit update confirm cancel]
+  before_action :set_screening, only: %i[new create show edit confirm cancel]
 
   def index
     authorize Reservation
@@ -8,10 +8,12 @@ class ReservationsController < ApplicationController
   end
 
   def new
+    authorize Reservation
     @reservation = @screening.reservations.build
   end
 
   def create
+    authorize Reservation
     new_reservation_params = reservation_params.merge(email: current_user&.email) if current_user&.user?
     if @screening.reservations.create!(new_reservation_params || reservation_params)
       redirect_to after_create_reservation_path
@@ -32,6 +34,16 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def confirm
+    @reservation.confirmed!
+    redirect_to screening_reservation_path(@screening, @reservation), status: :see_other
+  end
+
+  def cancel
+    @reservation.cancelled!
+    redirect_to screening_reservation_path(@screening, @reservation), status: :see_other
+  end
+
   private
 
   def after_create_reservation_path
@@ -40,6 +52,7 @@ class ReservationsController < ApplicationController
 
   def set_reservation
     @reservation = Reservation.find(params[:id])
+    authorize @reservation
   end
 
   def set_screening
