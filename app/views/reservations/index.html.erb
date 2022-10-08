@@ -21,9 +21,22 @@
             <td><%= reservation.status %></td>
             <td>
               <% if policy(reservation).show? %>
-                <%= link_to 'Show', screening_reservation_path(reservation.screening, reservation), class: 'btn btn-outline-warning btn-sm' %>
+                <%= link_to 'Show',
+                      screening_reservation_path(reservation.screening, reservation),
+                      class: 'btn btn-outline-warning btn-sm' %>
               <% else %>
-                <%= link_to 'Edit', edit_screening_reservation_path(reservation.screening, reservation), class: 'btn btn-outline-warning btn-sm' %>
+                <% if policy(reservation).edit? %>
+                  <%= link_to 'Edit',
+                        edit_screening_reservation_path(reservation.screening, reservation),
+                        class: 'btn btn-outline-warning btn-sm' %>
+                <% end %>
+                <% if policy(reservation).cancel? %>
+                  <%= link_to 'Cancel',
+                        cancel_screening_reservation_path(reservation.screening, reservation),
+                        data: { turbo_method: :patch,
+                                turbo_confirm: "Are you sure?" },
+                        class: 'btn btn-outline-warning btn-sm'%>
+                <% end %>
               <% end %>
             </td>
           </tr>
