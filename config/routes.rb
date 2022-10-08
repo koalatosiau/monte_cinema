@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :halls
   resources :movies
   resources :screenings do
-    resources :reservations, except: :index do
+    resources :reservations, only: %i[new create] do
       member do
         patch :confirm
         patch :cancel

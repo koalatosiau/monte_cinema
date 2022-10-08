@@ -5,8 +5,7 @@
         <tr>
           <th scope="col">Email</th>
           <th scope="col">Screening</th>
-          <th scope="col">Created at</th>
-          <th scope="col">Quantity</th>
+          <th scope="col">Seats</th>
           <th scope="col">Status</th>
           <th scope="col">Action</th>
         </tr>
@@ -16,27 +15,22 @@
           <tr>
             <td><%= reservation.email %></td>
             <td class="text-wrap"><%= reservation.screening.movie_title_with_start %></td>
-            <td class="text-wrap"><%= reservation.created_at %></td>
-            <td><%= reservation.quantity %></td>
+            <td><%= reservation.seats.pluck(:number) %></td>
             <td><%= reservation.status %></td>
             <td>
-              <% if policy(reservation).show? %>
-                <%= link_to 'Show',
-                      screening_reservation_path(reservation.screening, reservation),
-                      class: 'btn btn-outline-warning btn-sm' %>
-              <% else %>
-                <% if policy(reservation).edit? %>
-                  <%= link_to 'Edit',
-                        edit_screening_reservation_path(reservation.screening, reservation),
-                        class: 'btn btn-outline-warning btn-sm' %>
-                <% end %>
-                <% if policy(reservation).cancel? %>
-                  <%= link_to 'Cancel',
-                        cancel_screening_reservation_path(reservation.screening, reservation),
-                        data: { turbo_method: :patch,
-                                turbo_confirm: "Are you sure?" },
-                        class: 'btn btn-outline-warning btn-sm'%>
-                <% end %>
+              <% if policy(reservation).confirm? %>
+                <%= link_to 'Confirm',
+                      confirm_screening_reservation_path(reservation.screening, reservation),
+                      data: { turbo_method: :patch,
+                              turbo_confirm: "Are you sure?" },
+                      class: 'btn btn-outline-warning btn-sm'%>
+              <% end %>
+              <% if policy(reservation).cancel? %>
+                <%= link_to 'Cancel',
+                      cancel_screening_reservation_path(reservation.screening, reservation),
+                      data: { turbo_method: :patch,
+                              turbo_confirm: "Are you sure?" },
+                      class: 'btn btn-outline-warning btn-sm'%>
               <% end %>
             </td>
           </tr>

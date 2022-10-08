@@ -1,15 +1,15 @@
 <div class="card-body">
   <p class="card-text">
-    <%= reservation.screening.movie_title_with_start %>
-  <%= form_with(model: [@screening, reservation]) do |form| %>
-    <% reservation.errors.each do |error| %>
-      <p><%= error.full_message %></p>
+    <%= @screening.movie_title_with_start %>
+    <%= form_with(model: form, url: screening_reservations_path) do |f| %>
+      <% unless current_user&.user? %>
+        <%= f.text_field :email, placeholder: 'email' %>
+      <% end %>
+      <div class="my-2">
+        <%= f.label 'Choose your seat number - hold down the control (ctrl) or command (cmd) button to select multiple options' %>
+        <%= f.select :numbers, @screening.seats_availability, {}, { multiple: true, class: "form-select" } %>
+      </div>
+      <%= f.submit class: 'btn btn-sm btn-outline-warning' %>
+      <%= link_to "Cancel", :back, class: 'btn btn-sm btn-outline-warning'%>
     <% end %>
-    <%= form.number_field :quantity, in: 1..10 %>
-    <% unless current_user&.user? %>
-      <%= form.text_field :email, placeholder: 'email' %>
-    <% end %>
-    <%= form.submit class: 'btn btn-sm btn-outline-warning' %>
-    <%= link_to "Cancel", :back, class: 'btn btn-sm btn-outline-warning'%>
-  <% end %>
 </div>

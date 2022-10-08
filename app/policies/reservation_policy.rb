@@ -13,23 +13,11 @@ class  ReservationPolicy < ApplicationPolicy
     user
   end
 
-  def show?
-    user&.admin?
-  end
-
-  def edit?
-    (record.email == user&.email || user&.admin?) && record.pending?
-  end
-
-  def update?
-    edit?
-  end
-
   def confirm?
-    show? && record.pending?
+    user&.admin? && record.pending?
   end
 
   def cancel?
-    edit? && !record.cancelled?
+    (record.email == user&.email || user&.admin?) && !record.cancelled?
   end
 end

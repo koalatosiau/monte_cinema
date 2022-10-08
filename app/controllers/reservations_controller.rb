@@ -1,20 +1,19 @@
 class ReservationsController < ApplicationController
-  before_action :set_reservation, only: %i[show edit update confirm cancel]
-  before_action :set_screening, only: %i[new create show edit confirm cancel]
+  before_action :set_reservation, only: %i[confirm cancel]
+  before_action :set_screening, only: %i[new create confirm cancel]
+  before_action :load_form, only: %i[new create]
 
   def index
     authorize Reservation
     @reservations = policy_scope(Reservation).includes(screening: :movie)
   end
 
-  def new
-    @reservation = @screening.reservations.build
-  end
+  def new; end
 
   def create
-    redirect_existing_user and return if User.pluck(:email).include?(reservation_params[:email])
-    new_reservation_params = reservation_params.merge(email: current_user&.email) if current_user&.user?
-    if @screening.reservations.create!(new_reservation_params || reservation_params)
+    redirect_existing_user and return if login_required?
+
+    if @form.submit(reservation_params)
       redirect_to after_create_reservation_path
     else
       render :new, status: :unprocessable_entity
@@ -23,27 +22,27 @@ class ReservationsController < ApplicationController
 
   def show; end
 
-  def edit; end
-
-  def update
-    if @reservation.update(reservation_params)
-      redirect_to screening_reservation_path(@reservation)
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
   def confirm
     @reservation.confirmed!
-    redirect_to screening_reservation_path(@screening, @reservation), status: :see_other
+    redirect_to screening_reservations_path(@screening, @reservation), status: :see_other
   end
 
   def cancel
     @reservation.cancelled!
-    redirect_to screening_reservation_path(@screening, @reservation), status: :see_other
+    redirect_to screening_reservations_path(@screening, @reservation), status: :see_other
   end
 
   private
+
+  def load_form
+    @form = ReservationForm.new(@screening)
+  end
+
+  def login_required?
+    return if current_user
+
+    User.pluck(:email).include?(params[:reservation_form][:email])
+  end
 
   def redirect_existing_user
     flash[:alert] = "Sign in before reservation"
@@ -64,6 +63,6 @@ class ReservationsController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:quantity, :status, :email)
+    params.require(:reservation_form).permit(:email, numbers: []).merge(current_user: current_user)
   end
 end
