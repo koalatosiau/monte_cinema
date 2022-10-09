@@ -1,5 +1,7 @@
 class Reservation < ApplicationRecord
   self.ignored_columns = ['quantity']
+  CANCELLATION_TIME = 30.minutes
+  
   belongs_to :screening
   has_many :seats, dependent: :destroy
 
