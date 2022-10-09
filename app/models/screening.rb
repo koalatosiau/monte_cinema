@@ -16,6 +16,6 @@ class Screening < ApplicationRecord
   end
 
   def seats_availability
-    (1..capacity).to_a  - seats_taken
+    ((1..capacity).to_a  - seats_taken).first(20)
   end
 end
