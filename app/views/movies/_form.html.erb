@@ -4,7 +4,7 @@
     <% @movie.errors.each do |error| %>
       <p><%= error.full_message %></p>
     <% end %>
-    <%= form.text_field :name, placeholder: 'title' %>
+    <%= form.text_field :title, placeholder: 'title' %>
     <%= form.text_field :description, placeholder: 'description' %>
     <%= form.text_field :runtime, placeholder: 'runtime' %>
     <%= form.submit class: 'btn btn-sm btn-outline-warning' %>
