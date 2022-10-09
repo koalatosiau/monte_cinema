@@ -28,7 +28,7 @@ class ReservationsController < ApplicationController
   end
 
   def cancel
-    @reservation.cancelled!
+    Reservations::CancelService.new(@reservation).call
     redirect_to screening_reservations_path(@screening, @reservation), status: :see_other
   end
 

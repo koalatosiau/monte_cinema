@@ -17,7 +17,8 @@ class ReservationForm
     assign_attributes(params)
     return false if invalid?
 
-    @screening.reservations.create!(reservation_attributes)
+    reservation = @screening.reservations.create!(reservation_attributes)
+    Reservations::CancelJob.set(wait_until: @screening.start - Reservation::CANCELLATION_TIME).perform_later(reservation)
   end
 
   private
