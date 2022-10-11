@@ -16,8 +16,9 @@ class MoviesController < ApplicationController
     @movie = Movie.new(movie_params)
 
     if @movie.save
-      redirect_to movies_path
+      redirect_to movies_path, notice: t('movie.created')
     else
+      flash.now[:alert] = @movie.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
   end
@@ -28,8 +29,9 @@ class MoviesController < ApplicationController
 
   def update
     if @movie.update(movie_params)
-      redirect_to @movie
+      redirect_to @movie, notice: t('movie.updated')
     else
+      flash.now[:alert] = @movie.errors.full_messages.to_sentence
       render :edit, status: :unprocessable_entity
     end
   end
@@ -37,7 +39,7 @@ class MoviesController < ApplicationController
   def destroy
     @movie.destroy
 
-    redirect_to movies_path, status: :see_other
+    redirect_to movies_path, status: :see_other, alert: t('movie.deleted')
   end
 
   private

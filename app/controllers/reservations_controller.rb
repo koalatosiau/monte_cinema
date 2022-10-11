@@ -14,8 +14,10 @@ class ReservationsController < ApplicationController
     redirect_existing_user and return if login_required?
 
     if @form.submit(reservation_params)
+      flash[:notice] = t('reservation.created')
       redirect_to after_create_reservation_path
     else
+      flash.now[:alert] = @form.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
   end
@@ -24,11 +26,13 @@ class ReservationsController < ApplicationController
 
   def confirm
     @reservation.confirmed!
+    flash[:notice] = t('reservation.confirmed')
     redirect_to screening_reservations_path(@screening, @reservation), status: :see_other
   end
 
   def cancel
     Reservations::CancelService.new(@reservation).call
+    flash[:notice] = t('reservation.cancelled')
     redirect_to screening_reservations_path(@screening, @reservation), status: :see_other
   end
 
@@ -45,7 +49,7 @@ class ReservationsController < ApplicationController
   end
 
   def redirect_existing_user
-    flash[:alert] = "Sign in before reservation"
+    flash[:alert] = t('sign_in.required')
     redirect_to new_user_session_path, status: :see_other
   end
 

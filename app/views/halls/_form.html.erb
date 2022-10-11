@@ -1,9 +1,6 @@
 <div class="card-body">
   <p class="card-text">
   <%= form_with model: @hall do |form| %>
-    <% @hall.errors.each do |error| %>
-      <p><%= error.full_message %></p>
-    <% end %>
     <%= form.text_field :name, placeholder: 'name' %>
     <%= form.text_field :capacity, placeholder: 'capacity' %>
     <%= form.submit class: 'btn btn-sm btn-outline-warning' %>

@@ -1,9 +1,6 @@
 <div class="card-body">
   <p class="card-text">
   <%= form_with model: @screening do |form| %>
-    <% @screening.errors.each do |error| %>
-      <p><%= error.full_message %></p>
-    <% end %>
     <%= form.datetime_field :start %>
     <%= form.collection_select :hall_id, @halls, :id, :name, prompt: true %>
     <%= form.collection_select :movie_id, @movies, :id, :title, prompt: true %>

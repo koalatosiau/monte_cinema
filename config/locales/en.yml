@@ -31,3 +31,21 @@
 
 en:
   hello: "Hello world"
+  hall:
+    created: "Hall successfully created"
+    updated: "Hall successfully updated"
+    deleted: "Hall deleted"
+  movie:
+    created: "Movie successfully created"
+    updated: "Movie successfully updated"
+    deleted: "Movie deleted"
+  screening:
+    created: "Screening successfully created"
+    updated: "Screening successfully updated"
+    deleted: "Screening deleted"
+  reservation:
+    created: "Reservation successfully created"
+    confirmed: "Reservation confirmed"
+    cancelled: "Reservation cancelled"
+  sign_in:
+    required: "Account with this email was already created, please try signing in"
