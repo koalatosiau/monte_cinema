@@ -27,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_09_141059) do
     t.integer "runtime", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.check_constraint "runtime > 0", name: "runtime_check"
   end
 
   create_table "reservations", force: :cascade do |t|
