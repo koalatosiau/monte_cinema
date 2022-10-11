@@ -15,9 +15,11 @@ movie_runtimes = [72, 90, 100, 120, 175]
 end
 
 # Update screening seeds to iterate over halls or days_in_advance if restricting screening to one per hall at the time.
-days_in_advance = [2, 5, 7]
-(3 - Screening.count).times do
-  Screening.find_or_create_by(hall: Hall.all.sample, movie: Movie.all.sample, start: Time.new.next_day(days_in_advance.sample))
+days_in_advance = [2, 3, 4, 5, 7]
+Movie.all.each do |movie|
+  ((1..5).to_a.sample).times do
+    Screening.find_or_create_by(hall: Hall.all.sample, movie: movie, start: Time.new.next_day(days_in_advance.sample))
+  end
 end
 
 user = User.find_by(email: 'user@example.com')
