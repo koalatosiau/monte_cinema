@@ -1,24 +1,33 @@
-# README
+# Monte Cinema :movie_camera: :popcorn:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple ticket booking tool for cinema developed as a part of Monterail Rubycamp.
 
-Things you may want to cover:
+## Technology stack
 
-* Ruby version 3.1.2
+  Name |  Version |
+  | :--: | :---: |
+  | [Ruby](https://www.ruby-lang.org) | 3.1.2 |
+  | [Rails](http://www.rubyonrails.org/) | 7.0.3 |
+  | [PostgreSQL](https://www.postgresql.org/) | 14.5 |
 
-* System dependencies
+## Configuration
 
-* Configuration
+  Clone project repository: `git clone git@github.com:koalatosiau/monte_cinema.git`
 
-* Database creation
+  Install required gems: `bundle install`
 
-* Database initialization
+  Create and seed database:
+  ```
+  rails db:create
+  rails db:migrate
+  rails db:seed
+  ```
+  or alternatively: `rails db:setup`
 
-* How to run the test suite
+  Start the Rails server: `rails server` or `rails s`
 
-* Services (job queues, cache servers, search engines, etc.)
+## How to run the test suite
 
-* Deployment instructions
+  Simply write `rspec` in console and watch the RSpec magic happen!
 
-* ...
+  If you choose to do so, you can reset the format to default by removing `--format documentation` from `.rspec` file.
