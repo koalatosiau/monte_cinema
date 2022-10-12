@@ -4,7 +4,8 @@ class ReservationForm
   validates :email, presence: true, unless: :user?
   validate :user_email, if: :user?
   validate :numbers_presence
-  validate :numbers_uniq
+  validate :numbers_uniqueness
+  validate :seats_uniqueness
 
 
   attr_accessor :screening, :email, :numbers, :current_user
@@ -39,12 +40,12 @@ class ReservationForm
   end
 
   def numbers_presence
-    return if numbers.any?
+    return if numbers.compact_blank.any?
 
     errors.add(:numbers, :blank)
   end
 
-  def numbers_uniq
+  def numbers_uniqueness
     return if numbers.uniq.count == numbers.count
 
     errors.add(:numbers, :taken)
@@ -54,5 +55,11 @@ class ReservationForm
     return if email.nil? || email == current_user.email
 
     errors.add(:email, :taken)
+  end
+
+  def seats_uniqueness
+    return unless numbers.any?{ |n| screening.seats.pluck(:number).map(&:to_s).include?(n) }
+
+    errors.add(:numbers, :taken)
   end
 end

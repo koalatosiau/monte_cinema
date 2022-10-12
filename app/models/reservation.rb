@@ -1,7 +1,7 @@
 class Reservation < ApplicationRecord
   self.ignored_columns = ['quantity']
   CANCELLATION_TIME = 30.minutes
-  
+
   belongs_to :screening
   has_many :seats, dependent: :destroy
 
@@ -13,8 +13,4 @@ class Reservation < ApplicationRecord
   validates :email, presence: true
 
   delegate :movie_title_with_start, to: :screening
-
-  def reserved_seats_numbers
-    seats.pluck(:number)
-  end
 end

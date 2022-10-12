@@ -11,7 +11,9 @@
       </p>
       <p class="card-text">
         <% @movie.screenings.each do |screening| %>
-          <%= link_to "#{screening.start.strftime('%d %b, %H:%M')}", new_screening_reservation_path(screening), class: 'btn btn-warning btn-sm' %>
+          <%= link_to "#{screening.start.strftime('%d %b, %H:%M')}",
+                new_screening_reservation_path(screening),
+                class: "btn btn-warning btn-sm #{'disabled' unless policy(screening.reservations.build).new? }" %>
         <% end %>
       </p>
     </div>
