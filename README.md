@@ -10,7 +10,7 @@ Simple ticket booking tool for cinema developed as a part of Monterail Rubycamp.
   | [Rails](http://www.rubyonrails.org/) | 7.0.3 |
   | [PostgreSQL](https://www.postgresql.org/) | 14.5 |
 
-## Configuration
+## Configuration :hammer_and_wrench:
 
   Clone project repository: `git clone git@github.com:koalatosiau/monte_cinema.git`
 
@@ -31,3 +31,7 @@ Simple ticket booking tool for cinema developed as a part of Monterail Rubycamp.
   Simply write `rspec` in console and watch the RSpec magic happen!
 
   If you choose to do so, you can reset the format to default by removing `--format documentation` from `.rspec` file.
+  
+## Live App 
+
+  [Monte Cinema on Heroku](https://monte-cinema-as.herokuapp.com/)
