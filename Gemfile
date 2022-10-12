@@ -53,13 +53,13 @@ gem 'sassc-rails'
 # gem "image_processing", "~> 1.2"
 gem 'devise'
 gem "pundit", "~> 2.2"
+gem 'faker', '~> 2.23'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'pry', '~> 0.14.1'
   gem 'factory_bot_rails'
-  gem 'faker', '~> 2.23'
   gem 'rubocop', '~> 1.36.0', require: false
   gem 'rubocop-rails', '~> 2.16.0', require: false
   gem 'rubocop-rspec', '~> 2.12.1', require: false
