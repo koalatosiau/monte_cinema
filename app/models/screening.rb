@@ -2,6 +2,7 @@ class Screening < ApplicationRecord
   belongs_to :hall
   belongs_to :movie
   has_many :reservations, dependent: :nullify
+  has_many :seats, through: :reservations
 
   validates :start, presence: true, comparison: { greater_than: Date.tomorrow.to_time }
 
@@ -12,7 +13,7 @@ class Screening < ApplicationRecord
   end
 
   def seats_taken
-    reservations.map(&:reserved_seats_numbers).flatten
+    seats.pluck(:number)
   end
 
   def seats_availability

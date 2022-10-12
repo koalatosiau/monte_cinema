@@ -13,6 +13,14 @@ class  ReservationPolicy < ApplicationPolicy
     user
   end
 
+  def new?
+    record.screening.seats_availability.any?
+  end
+
+  def create?
+    new?
+  end
+
   def confirm?
     user&.admin? && record.pending?
   end
