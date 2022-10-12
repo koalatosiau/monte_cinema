@@ -3,7 +3,7 @@ class Screening < ApplicationRecord
   belongs_to :movie
   has_many :reservations, dependent: :nullify
 
-  validates :start, presence: true
+  validates :start, presence: true, comparison: { greater_than: Date.tomorrow.to_time }
 
   delegate :capacity, to: :hall
 

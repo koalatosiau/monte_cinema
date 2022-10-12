@@ -16,8 +16,9 @@ class HallsController < ApplicationController
     @hall = Hall.new(hall_params)
 
     if @hall.save
-      redirect_to halls_path
+      redirect_to halls_path, notice: t('hall.created')
     else
+      flash.now[:alert] = @hall.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
   end
@@ -28,8 +29,9 @@ class HallsController < ApplicationController
 
   def update
     if @hall.update(hall_params)
-      redirect_to @hall
+      redirect_to @hall, notice: t('hall.updated')
     else
+      flash.now[:alert] = @hall.errors.full_messages.to_sentence
       render :edit, status: :unprocessable_entity
     end
   end
@@ -37,7 +39,7 @@ class HallsController < ApplicationController
   def destroy
     @hall.destroy
 
-    redirect_to halls_path, status: :see_other
+    redirect_to halls_path, status: :see_other, alert: t('hall.deleted')
   end
 
   private

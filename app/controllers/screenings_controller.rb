@@ -1,6 +1,6 @@
 class ScreeningsController < ApplicationController
   before_action :set_screening, only: %i[edit update destroy]
-  before_action :set_halls, :set_movies, only: %i[new edit]
+  before_action :set_halls, :set_movies, only: %i[new create edit update]
 
   def index
     @screenings = Screening.all
@@ -17,8 +17,9 @@ class ScreeningsController < ApplicationController
     @screening = Screening.new(screening_params)
 
     if @screening.save
-      redirect_to screenings_path
+      redirect_to screenings_path, notice: t('screening.created')
     else
+      flash.now[:alert] = @screening.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
   end
@@ -27,8 +28,9 @@ class ScreeningsController < ApplicationController
 
   def update
     if @screening.update(screening_params)
-      redirect_to @screening
+      redirect_to screenings_path, notice: t('screening.updated')
     else
+      flash.now[:alert] = @screening.errors.full_messages.to_sentence
       render :edit, status: :unprocessable_entity
     end
   end
@@ -36,7 +38,7 @@ class ScreeningsController < ApplicationController
   def destroy
     @screening.destroy
 
-    redirect_to screenings_path, status: :see_other
+    redirect_to screenings_path, status: :see_other, notice: t('screening.deleted')
   end
 
   private
