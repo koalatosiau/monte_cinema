@@ -35,3 +35,10 @@ Simple ticket booking tool for cinema developed as a part of Monterail Rubycamp.
 ## Live App 
 
   [Monte Cinema on Heroku](https://monte-cinema-as.herokuapp.com/)
+  
+## Known issues :construction:
+
+ - devise notices don't always show up (for example password requirements during registration)
+   - sometimes when they do, they are persistent (when deleting a user)
+ - deleting hall, movie or screening *will* cause errors with associated reservations (as reservations are not to be permanently deleted, there needs to be more logic added than simple dependent option)
+ - screenings may be added with the same start time in the same hall
